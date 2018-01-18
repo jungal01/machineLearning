@@ -35,15 +35,18 @@ int minimax(Board& board, char player) {
             for (i=0; i<6; i++) {
                 for (j=0; j<7; j++) {
                     if (board.data[i][j] == Dummy) {
-                        board.data[i][j] = Computer;
-                        val = minimax(board, Human);
-                        board.data[i][j] = Dummy;
+                        if ((i==5) || (board.data[i+1][j] = Dummy)) {
+                            
+                            board.data[i][j] = Computer;
+                            val = minimax(board, Human);
+                            board.data[i][j] = Dummy;
 
-                        if (val == 1)
-                            return val;
+                            if (val == 1)
+                                return val;
 
-                        if (val > maxVal) {
-                            maxVal = val;
+                            if (val > maxVal) {
+                                maxVal = val;
+                            }
                         }
                     }
 
@@ -57,15 +60,17 @@ int minimax(Board& board, char player) {
             for (i=0; i<6; i++) {
                 for (j=0; j<7; j++) {
                     if (board.data[i][j] == Dummy) {
-                        board.data[i][j] = Human;
-                        val = minimax(board, Computer);
-                        board.data[i][j] = Dummy;
+                        if ((i==5) || (board.data[i+1][j] = Dummy)) {
+                            board.data[i][j] = Human;
+                            val = minimax(board, Computer);
+                            board.data[i][j] = Dummy;
 
-                        if (val == -1)
-                            return val;
+                            if (val == -1)
+                                return val;
 
-                        if (val < minVal) {
-                            minVal = val;
+                            if (val < minVal) {
+                                minVal = val;
+                            }
                         }
                     }
 
