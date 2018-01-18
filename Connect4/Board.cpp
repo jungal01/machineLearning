@@ -74,5 +74,5 @@ bool Board::full() {
                 return false;
         }
     }
-
     return true;
+}
