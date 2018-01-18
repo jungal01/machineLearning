@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Board.cpp
- * Author: leekentd
- * 
- * Created on January 12, 2018, 1:37 PM
- */
-
 #include "Board.h"
 #include <stdlib.h>
 
@@ -18,7 +5,7 @@ Board::Board() {
     int i;
     
     for (i=0;i<3;i++)
-        data.push_back(vector<char>(3));
+        data.push_back(vector<unsigned char>(3));
 }
 
 Board::Board(const Board& orig) {
@@ -28,17 +15,26 @@ Board::Board(const Board& orig) {
 Board::~Board() {
 }
 
-int Board::eval() {
+unsigned char Board::boardhash() {
+    unsigned char hashval = 0;
+    for (int i = 0; i < data.size(); i++) {
+        for (int j = 0; j < data[i].size(); j++) {
+            hashval += data[i][j] + 1;
+        }
+    }
+    return hashval;
+}
 
+unsigned char Board::eval() {
 
     int i, j;
 
-    int diag1Sum = 0;
-    int diag2Sum = 0;
+    unsigned char diag1Sum = 0;
+    unsigned char diag2Sum = 0;
 
     for (i = 0; i < 3; i++) {
-        int rowSum = 0;
-        int colSum = 0;
+       unsigned char rowSum = 0;
+       unsigned char colSum = 0;
         diag1Sum += data[i][i];
         diag2Sum += data[i][2 - i];
 
